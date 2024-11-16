@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+langchain
+chromadb
+openai
+pydantic
+python-dotenv
+gunicorn
