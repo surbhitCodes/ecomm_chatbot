@@ -63,12 +63,12 @@ arbor-test/
 ## Setup Instructions
 Note: First clone the repository, then create the following files and ensure they contain $BASE\_URL$, $OPENAI\_KEY$ and $API\_KEY$ as mentioned below:
 
-backend/.env
+- backend/.env
 ```bash
 API_KEY="secureapikeyforbackend"
 OPENAI_KEY="your-openai-api-key"
 ```
-arbor_app/assets/.env
+- arbor_app/assets/.env
 ```bash
 API_KEY="secureapikeyforbackend"
 OPENAI_KEY="your-openai-api-key"
