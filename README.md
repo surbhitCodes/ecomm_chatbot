@@ -58,7 +58,7 @@ arbor-test/
 
 ## Project Architecture
 
-
+![alt text](arbor_test.jpg)
 
 ## Setup Instructions
 
@@ -78,13 +78,7 @@ pip install -r requirements.txt
 ```
 
 3. Configure environment variables in `.env`.
-
 4. Populate the vector database:
-
-```bash
-python main.py
-```
-
 5. Run the backend server:
 
 ```bash
@@ -92,6 +86,10 @@ uvicorn main:app --reload
 ```
 
 ### Frontend Setup
+
+###### If flutter is not installed use the following link to install
+
+###### https://docs.flutter.dev/get-started/install
 
 1. Navigate to the Flutter project directory:
 
@@ -117,9 +115,28 @@ flutter run
 - **POST /project-planning/estimate**: Submit a project description to receive material estimates.
 - **POST /technical-support/**: Ask technical questions regarding materials, installation, etc.
 
-## Testing
+## API Documentation
 
-Run tests using pytest:
+After running the api using command -
+
+```bash
+uvicorn main:app --reload
+```
+
+open the link below
+
+http://127.0.0.1:8000/docs#/
+
+## Testing
+Functional testing completed on following queries -
+1. How to install lumber? /technical-support
+2. How much does lumber cost? /queries
+3. How to plan installation of lumber? /project-planning
+4. What are the types of lumber available and their stock stituation? /queries
+5. Which lumber is better? /queries
+6. \<empty> /queries /technical-support /project-planning
+
+Unit testing could not be executed in the allotted time, while as things are working it can be programmed using pytest.
 
 ```bash
 pytest
