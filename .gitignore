@@ -1,1 +1,3 @@
 arbor_env/
+backend/.env
+arbor_app/assets/.env
