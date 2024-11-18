@@ -138,9 +138,7 @@ Functional testing completed on following queries -
 
 Unit testing could not be executed in the allotted time, while as things are working it can be programmed using pytest.
 
-```bash
-pytest
-
+---
 Copyright (c) 2024 Surbhit Kumar
 
 All rights reserved.
