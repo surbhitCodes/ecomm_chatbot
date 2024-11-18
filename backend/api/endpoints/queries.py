@@ -3,6 +3,8 @@ Program to handle API endpoint for general queries
 """
 
 
+import time
+import logging
 from fastapi import APIRouter, HTTPException, Depends
 from core.llm import get_qa_chain, get_retriever
 from services.conversation import create_session, add_to_conversation, get_conversation
@@ -16,6 +18,8 @@ router = APIRouter(
     dependencies=[Depends(verify_api_key)]
 )
 
+logger = logging.getLogger(__name__)
+
 # load prompt builder
 prompt_builder = PromptBuilder() 
 
@@ -26,6 +30,8 @@ def material_query(request: QueryRequest):
     return: Query Response by LLM using RAG model
     """
     try:
+        start=time.time()
+        
         # session management
         session_id = request.session_id or create_session()
         add_to_conversation(session_id, f"User: {request.query}")
@@ -52,6 +58,9 @@ def material_query(request: QueryRequest):
         
         # source document extraction
         sources = [doc.page_content for doc in source_documents]
+        
+        
+        logger.info(f'Time taken: {(time.time()-start):.2f} seconds')
         
 
         return QueryResponse(

@@ -2,6 +2,8 @@
 Program to handle API endpoint for project planning queries
 """
 
+import logging
+import time
 from fastapi import APIRouter, HTTPException, Depends
 from core.llm import get_qa_chain, get_retriever
 from services.conversation import create_session, add_to_conversation, get_conversation
@@ -15,12 +17,16 @@ router = APIRouter(
     dependencies=[Depends(verify_api_key)]
 )
 
+logger = logging.getLogger(__name__)
+
 # load the prompt builder
 prompt_builder = PromptBuilder()
 
 @router.post("/", response_model=PlanningResponse)
 def project_planning(query: PlanningQuery):
     try:
+        start = time.time()
+        
         # session management
         session_id = query.session_id or create_session()
         add_to_conversation(session_id, f"User: {query.project_description}")
@@ -46,7 +52,9 @@ def project_planning(query: PlanningQuery):
         conversation_history = get_conversation(session_id)
 
         # reference extraction
-        references = [doc.page_content for doc in source_documents]        
+        references = [doc.page_content for doc in source_documents]  
+        
+        logger.info(f'Time taken: {(time.time()-start):.2f} seconds')      
 
         return PlanningResponse(
             session_id=session_id,

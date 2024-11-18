@@ -1,13 +1,17 @@
 """
 Program to handle API endpoint for technical support queries
 """
-
+import logging
+import time
 from fastapi import APIRouter, HTTPException, Depends
 from core.llm import get_qa_chain, get_retriever
 from services.conversation import create_session, add_to_conversation, get_conversation
 from api.dependencies import verify_api_key
 from schemas.chat_schema import TechnicalQuery, TechnicalResponse
 from services.prompt_builder import PromptBuilder  # Import the PromptBuilder class
+
+logger = logging.getLogger(__name__)
+
 
 router = APIRouter(
     prefix="/technical-support",
@@ -25,6 +29,8 @@ def technical_support(query: TechnicalQuery):
     return: LLM response to augmented query
     """
     try:
+        start = time.time()
+        
         # session management
         session_id = query.session_id or create_session()
         add_to_conversation(session_id, f"User: {query.question}")
@@ -51,6 +57,8 @@ def technical_support(query: TechnicalQuery):
 
         # get reference documents
         references = [doc.page_content for doc in source_documents]
+        
+        logger.info(f'Time taken: {(time.time()-start):.2f} seconds')
         
 
         return TechnicalResponse(
