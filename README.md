@@ -61,10 +61,20 @@ arbor-test/
 ![alt text](arbor_test.jpg)
 
 ## Setup Instructions
-Note: First clone the repository, then ensure the following files contain $OPENAI_KEY$ and $API_KEY$
+Note: First clone the repository, then create the following files and ensure they contain $BASE\_URL$, $OPENAI\_KEY$ and $API\_KEY$ as mentioned below:
 
 backend/.env
+```bash
+API_KEY="secureapikeyforbackend"
+OPENAI_KEY="your-openai-api-key"
+```
 arbor_app/assets/.env
+```bash
+API_KEY="secureapikeyforbackend"
+OPENAI_KEY="your-openai-api-key"
+BASE_URL="http://127.0.0.1:8000"
+```
+
 
 ### Backend Setup
 
