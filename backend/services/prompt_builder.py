@@ -15,6 +15,12 @@ class PromptBuilder:
         Dynamically build a prompt based on the category, context, and additional information.
         """
         prompt = self.base_prompts.get(category, "Default prompt text")
+        
+        format_instructions = (
+            "When formatting your response, use plain text ascii formatting, and no bold text"
+        )
+        
         if additional_info:
             prompt += f" {additional_info}"
-        return f"{prompt}\nContext: {context}"
+        
+        return f"{prompt}\nContext: {context}\n\n{format_instructions}"

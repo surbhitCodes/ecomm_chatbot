@@ -9,24 +9,29 @@ from services.setup_vector_db import populate_vector_db
 import logging
 from api.endpoints import technical_support, project_planning, queries
 
-
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+)
 logger = logging.getLogger(__name__)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """
-    When the FastAPI app is initialized, this function runs first
-    populating the vectorstore built on Chroma
+    Executes logic during app startup and shutdown.
     """
     logger.info("Starting up the application...")
-    populate_vector_db()
-    yield
+    try:
+        populate_vector_db() 
+        logger.info("Vector db updated successfully...")
+    except Exception as e:
+        logger.error(f"Error updating vector db: {e}")
+    yield  
     logger.info("Shutting down the application...")
 
 
-app = FastAPI(lifespan=lifespan)
-
 app = FastAPI(
+    lifespan=lifespan,
     title="Arbor Test Project API",
     description="LLM-powered assistant for contractors and builders.",
     version="1.0.0",

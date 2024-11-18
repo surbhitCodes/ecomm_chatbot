@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'pages/queries.dart';
+import 'pages/material_queries.dart';
 import 'pages/technical_support.dart';
 import 'pages/project_planning.dart';
 import 'styles.dart';
@@ -80,7 +80,7 @@ class HomePage extends StatelessWidget {
                     );
                   },
                   style: buttonStyle,
-                  child: const Text('General Queries'),
+                  child: const Text('Material Queries'),
                 ),
                 const SizedBox(width: 20),
                 ElevatedButton(

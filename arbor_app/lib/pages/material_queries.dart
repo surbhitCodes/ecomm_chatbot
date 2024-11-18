@@ -64,7 +64,7 @@ class _QueriesPageState extends State<QueriesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('General Queries', style: appBarTitleStyle),
+        title: Text('Material Queries', style: appBarTitleStyle),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -102,7 +102,7 @@ class _QueriesPageState extends State<QueriesPage> {
             TextField(
               controller: _queryController,
               decoration: const InputDecoration(
-                labelText: 'Enter your general query',
+                labelText: 'Enter your material query',
                 border: OutlineInputBorder(),
               ),
               onSubmitted: (_) => sendQuery(),
