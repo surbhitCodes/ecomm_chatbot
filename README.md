@@ -61,6 +61,10 @@ arbor-test/
 ![alt text](arbor_test.jpg)
 
 ## Setup Instructions
+Note: First clone the repository, then ensure the following files contain $OPENAI_KEY$ and $API_KEY$
+
+backend/.env
+arbor_app/assets/.env
 
 ### Backend Setup
 
