@@ -61,7 +61,7 @@ arbor-test/
 ![alt text](arbor_test.jpg)
 
 ## Setup Instructions
-Note: First clone the repository, then create the following files and ensure they contain $BASE\_URL$, $OPENAI\_KEY$ and $API\_KEY$ as mentioned below:
+Note: First clone the repository, then create the following files and ensure they contain $BASE\{_URL}$, $OPENAI\_{KEY}$ and $API\_{KEY}$ as mentioned below:
 
 - backend/.env
 ```bash
