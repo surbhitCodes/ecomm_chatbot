@@ -1,3 +1,7 @@
+"""
+Data storage in a dictionary, could use json or other document storage NoSQL dbms.
+"""
+
 materials_data = {
     "product_catalog": [
         {

@@ -1,28 +1,58 @@
+"""
+Program to handle API endpoint for project planning queries
+"""
+
 from fastapi import APIRouter, HTTPException, Depends
-from backend.api.dependencies import verify_api_key
-from backend.models.schemas import ProjectDescription, MaterialEstimate
-from backend.core.llm import get_qa_chain
+from core.llm import get_qa_chain, get_retriever
+from services.conversation import create_session, add_to_conversation, get_conversation
+from api.dependencies import verify_api_key
+from schemas.chat_schema import PlanningQuery, PlanningResponse
+from services.prompt_builder import PromptBuilder  # Import PromptBuilder
 
 router = APIRouter(
     prefix="/project-planning",
-    tags=["Project Planning Assistant"],
+    tags=["Project Planning"],
     dependencies=[Depends(verify_api_key)]
 )
 
-@router.post("/estimate", response_model=MaterialEstimate)
-def estimate_materials(project: ProjectDescription):
+# load the prompt builder
+prompt_builder = PromptBuilder()
+
+@router.post("/", response_model=PlanningResponse)
+def project_planning(query: PlanningQuery):
     try:
-        # Implement the logic using LangChain's RetrievalQA or custom chains
-        qa = get_qa_chain()
-        query = f"Estimate the materials and cost for the following project: {project.description}"
-        result = qa.run(query)
-        
-        # Process result to fit MaterialEstimate schema
-        # This is a placeholder and should be replaced with actual parsing logic
-        return MaterialEstimate(
-            materials=["2x4 Lumber", "Concrete"],
-            total_cost=1500.0,
-            details=result['result']
+        # session management
+        session_id = query.session_id or create_session()
+        add_to_conversation(session_id, f"User: {query.project_description}")
+
+        # augment query with prompt
+        prompt = prompt_builder.build_prompt(
+            category="project_planning",
+            context=query.project_description
+        )
+
+        # get vector store
+        retriever = get_retriever()
+        qa = get_qa_chain(retriever=retriever)
+
+        # fetch answers for augmented prompt
+        result = qa({"query": prompt})
+
+        answer = result['result']
+        source_documents = result.get('source_documents', [])
+
+        # update to conversation
+        add_to_conversation(session_id, f"Assistant: {answer}")
+        conversation_history = get_conversation(session_id)
+
+        # reference extraction
+        references = [doc.page_content for doc in source_documents]        
+
+        return PlanningResponse(
+            session_id=session_id,
+            plan=answer,
+            references=references,
+            conversation=conversation_history
         )
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

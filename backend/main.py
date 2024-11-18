@@ -1,6 +1,30 @@
+"""
+Main program to activate API (FastAPI) and run backend (use this with uvicorn)
+"""
+
+from contextlib import asynccontextmanager
 from fastapi import FastAPI
-from backend.api.endpoints import queries, project_planning, technical_support
-from backend.services.vector_db import populate_vector_db
+from fastapi.middleware.cors import CORSMiddleware
+from services.setup_vector_db import populate_vector_db
+import logging
+from api.endpoints import technical_support, project_planning, queries
+
+
+logger = logging.getLogger(__name__)
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """
+    When the FastAPI app is initialized, this function runs first
+    populating the vectorstore built on Chroma
+    """
+    logger.info("Starting up the application...")
+    populate_vector_db()
+    yield
+    logger.info("Shutting down the application...")
+
+
+app = FastAPI(lifespan=lifespan)
 
 app = FastAPI(
     title="Arbor Test Project API",
@@ -8,12 +32,18 @@ app = FastAPI(
     version="1.0.0",
 )
 
-# Populate the vector database on startup
-@app.on_event("startup")
-def startup_event():
-    populate_vector_db()
+# CORS config
+origins = ['*']
 
-# Include API routers
-app.include_router(queries.router)
-app.include_router(project_planning.router)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins, 
+    allow_credentials=True,
+    allow_methods=["*"],   
+    allow_headers=["*"],   
+)
+
+# include API routers
 app.include_router(technical_support.router)
+app.include_router(project_planning.router)
+app.include_router(queries.router)
