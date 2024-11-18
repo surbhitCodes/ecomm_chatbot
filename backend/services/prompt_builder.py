@@ -17,7 +17,7 @@ class PromptBuilder:
         prompt = self.base_prompts.get(category, "Default prompt text")
         
         format_instructions = (
-            "When formatting your response, use plain text ascii formatting, and no bold text"
+            "When formatting your response, use plain text ascii formatting, and no bold text with **"
         )
         
         if additional_info:

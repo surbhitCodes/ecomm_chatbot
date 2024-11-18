@@ -39,6 +39,8 @@ def create_collection(client, name="materials"):
     Create or retrieve chroma collection with the embedding function
     """
     embedding_function = HFWrapper(model_name="sentence-transformers/all-MiniLM-L6-v2")
+    # embedding_function = embedding_functions.OpenAIEmbeddingFunction(api_key=settings.OPENAI_KEY)
+
     existing_collections = [collection.name for collection in client.list_collections()]
     
     # delete collection if it exists to avoid dimensionality conflicts
