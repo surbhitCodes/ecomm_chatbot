@@ -1,5 +1,21 @@
 # Arbor Test Project
 
+## Project Overview
+
+An LLM-powered assistant designed for contractors and builders to aid in decision-making regarding building materials.
+
+## Features
+
+- Intelligent Material Queries
+- Project Planning Assistant
+- Technical Support
+
+## Technologies Used
+
+- **Backend**: FastAPI, LangChain, Chroma
+- **Frontend**: Flutter
+- **Database**: SQLite (via Chroma)
+
 ## Project Structure
 
 ```asciidoc
@@ -42,21 +58,7 @@ arbor-test/
 
 ## Project Architecture
 
-## Project Overview
 
-An LLM-powered assistant designed for contractors and builders to aid in decision-making regarding building materials.
-
-## Features
-
-- Intelligent Material Queries
-- Project Planning Assistant
-- Technical Support
-
-## Technologies Used
-
-- **Backend**: FastAPI, LangChain, Chroma
-- **Frontend**: Flutter
-- **Database**: SQLite (via Chroma)
 
 ## Setup Instructions
 
