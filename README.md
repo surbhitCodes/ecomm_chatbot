@@ -143,6 +143,9 @@ The Construction Materials Assistant is designed to provide users with technical
 - Current Strategy:
     - Default Prompts: Currently, the system uses default prompts template.
     - Formatting as plain text without ** for bold text, augmented with query to llm.
+ 
+### Performance Metrics
+Couldn't set up complex performance metrics, while a basic time measurement was done to determine which embedding worked faster, where OPENAI embeddings were proven more efficient than the HuggingFace one. Hugging Face took an average of 6-8 seconds when asked about the installation help, while OPENAI took about 3-4 seconds.
 
 ## Setup Instructions
 
