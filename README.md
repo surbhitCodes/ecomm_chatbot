@@ -87,7 +87,7 @@ BASE_URL="http://127.0.0.1:8000"
 
 ```bash
 python3 -m venv arbor_env
-source venv/bin/activate
+source arbor_env/bin/activate
 ```
 
 2. Install dependencies:
