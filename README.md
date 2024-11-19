@@ -197,7 +197,7 @@ flutter run
 ## API Endpoints
 
 - **POST /queries/**: Submit a natural language query about materials.
-- **POST /project-planning/estimate**: Submit a project description to receive material estimates.
+- **POST /project-planning/**: Submit a project description to receive material estimates.
 - **POST /technical-support/**: Ask technical questions regarding materials, installation, etc.
 
 ## API Documentation
