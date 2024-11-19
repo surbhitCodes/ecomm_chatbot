@@ -143,6 +143,16 @@ The Construction Materials Assistant is designed to provide users with technical
 - Current Strategy:
     - Default Prompts: Currently, the system uses default prompts template.
     - Formatting as plain text without ** for bold text, augmented with query to llm.
+
+### RAG System Design in Arbor Test
+
+- Uses Chroma to store semantic embeddings of knowledge base documents.
+- Queries and documents are embedded using OpenAI’s embedding models.
+- Top-k relevant documents are retrieved based on similarity to the query.
+- Retrieved documents are passed to OpenAI's GPT models for generating accurate, context-aware answers.
+- Responses include references to the source documents for transparency.
+- The system supports seamless updates to the knowledge base for improved relevance.
+- Enables effective support for technical queries and project planning tasks.
  
 ### Performance Metrics
 Couldn't set up complex performance metrics, while a basic time measurement was done to determine which embedding worked faster, where OPENAI embeddings were proven more efficient than the HuggingFace one. Hugging Face took an average of 6-8 seconds when asked about the installation help, while OPENAI took about 3-4 seconds.
