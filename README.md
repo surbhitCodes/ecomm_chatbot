@@ -141,7 +141,7 @@ The Construction Materials Assistant is designed to provide users with technical
 ### Prompt Engineering Approach
 
 - Current Strategy:
-    - Default Prompts: Currently, the system uses default prompts provided by LangChain's RetrievalQA chain.
+    - Default Prompts: Currently, the system uses default prompts template.
     - Formatting as plain text without ** for bold text, augmented with query to llm.
 
 ## Setup Instructions
