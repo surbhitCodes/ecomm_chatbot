@@ -89,27 +89,6 @@ The Construction Materials Assistant is designed to provide users with technical
     - Generates human-like responses to user queries.
     - Connected through LangChain's RetrievalQA chain to incorporate retrieved context into responses.
 
-### Data Flow - 
-
-
-- User Interaction 
-    - The user submits a query through the Flutter app.
-- API Request 
-    - The frontend sends the query to the backend via an HTTP POST request to the appropriate endpoint (/technical-support/ or /project-planning/).
-- Session Management 
-    - The backend checks for a session ID to maintain context or generates a new one.
-- Retrieval Augmented Generation:
-    - Retrieval:
-        - The query is embedded using OpenAI embeddings.
-        - The embedding is used to perform a similarity search in the vector store.
-        - Relevant documents are retrieved.
-    - Generation:
-        - The retrieved documents are provided as context to the LLM.
-        - The LLM generates a response that incorporates both the user's query and the contextual information.
-- Response Delivery:
-    - The generated response, along with any references and the session ID, is returned to the frontend.
-    - The frontend displays the response to the user.
-
 ### LLM integration details
 
 - Language Model:
@@ -121,22 +100,6 @@ The Construction Materials Assistant is designed to provide users with technical
     - Components Used:
         - ChatOpenAI: Handles communication with OpenAI's GPT models.
         - RetrievalQA Chain: A chain that combines document retrieval and question answering.
-
-### Process Flow:
-
-- Query Embedding:
-    - The user's query is converted into an embedding using OpenAIEmbeddings.
-
-- Document Retrieval:
-    - The embedding is used to perform a similarity search in Chroma.
-    - Relevant documents from the knowledge base are retrieved.
-
-- Response Generation:
-    - The retrieved documents are passed as context to the GPT-3.5-turbo model via the RetrievalQA chain.
-    - The LLM generates a response that is informed by both the query and the context.
-
-- Result Delivery:
-    - The response is returned to the backend, which forwards it to the frontend.
 
 ### Prompt Engineering Approach
 
