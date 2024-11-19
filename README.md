@@ -89,7 +89,7 @@ The Construction Materials Assistant is designed to provide users with technical
     - Generates human-like responses to user queries.
     - Connected through LangChain's RetrievalQA chain to incorporate retrieved context into responses.
 
-Data Flow - 
+### Data Flow - 
 
 
 - User Interaction 
@@ -122,7 +122,7 @@ Data Flow -
         - ChatOpenAI: Handles communication with OpenAI's GPT models.
         - RetrievalQA Chain: A chain that combines document retrieval and question answering.
 
-Process Flow:
+### Process Flow:
 
 - Query Embedding:
     - The user's query is converted into an embedding using OpenAIEmbeddings.
