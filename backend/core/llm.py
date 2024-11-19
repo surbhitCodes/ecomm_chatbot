@@ -1,28 +1,25 @@
 """
-Core program for infromation retreival using the RAG model from OpenAI LLM, using langchain
+Program for loading responses from OpenAI using RAG via vectorstore (chroma)
 """
 
 from langchain_chroma import Chroma
 from langchain_openai import OpenAIEmbeddings
 from langchain.chains import RetrievalQA
-from langchain_community.embeddings import HuggingFaceEmbeddings
-from langchain_community.chat_models import ChatOpenAI
+from langchain.chat_models import ChatOpenAI
 from core.config import settings
 import logging
+import chromadb
 
-# configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-
 def get_qa_chain(retriever=None):
     """
-    Build QA chain for information retrieval over RAG model
+    Getter for qa chain, via chroma based query retriever 
     """
     try:
-        if retriever is None: # create default retriever
+        if retriever is None:
             retriever = get_retriever()
-            
         qa = RetrievalQA.from_chain_type(
             llm=ChatOpenAI(openai_api_key=settings.OPENAI_KEY, temperature=0),
             chain_type="stuff",
@@ -35,16 +32,17 @@ def get_qa_chain(retriever=None):
         logger.error(f"Failed to initialize QA chain: {e}")
         raise
 
-
 def get_retriever():
     """
-    Using the embedding create a vectorstore retreiver, 
-    using k=5 top basis similarity
+    Getter for query retriever from vectorstore using OpenAI embeddings
     """
-    # embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2") # giving erroneous results
     embeddings = OpenAIEmbeddings(openai_api_key=settings.OPENAI_KEY)
+    persist_directory = "./chroma_db"
+
+    # initialize vectorstore
     vectorstore = Chroma(
-        persist_directory="./chroma_db",
-        embedding_function=embeddings
+        client=chromadb.PersistentClient(path=persist_directory),
+        embedding_function=embeddings,
+        collection_name="materials"
     )
     return vectorstore.as_retriever(search_type="similarity", search_kwargs={"k": 5})

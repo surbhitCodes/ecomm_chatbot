@@ -22,6 +22,7 @@ An LLM-powered assistant designed for contractors and builders to aid in decisio
 arbor-test/
 ├── backend/
 │   |
+│   ├── first_load_vector_db.py
 │   ├── main.py
 │   ├── api/
 │   │   ├── __init__.py
@@ -37,14 +38,13 @@ arbor-test/
 │   ├── services/
 │   │   ├── __init__.py
 │   │   ├── prompt_builder.py
-│   │   ├── vector_db.py
 │   │   └── conversation.py
 │   ├── schemas/
 │   │   ├── __init__.py
 │   │   └── chat_schemas.py
 │   └── data/
 │       ├── __init__.py
-│       └── helpers.py
+│       └── materials_data.py
 ├──arbor_app/lib/   [Flutter Project Files]
 |   ├── pages/
 │   │   ├── project_planning.dart
@@ -61,24 +61,29 @@ arbor-test/
 ![alt text](arbor_test.jpg)
 
 ## Setup Instructions
+
 Note: First clone the repository, then create the following files and ensure they contain BASE_URL, OPENAI_KEY and API_KEY as mentioned below:
 
 - backend/.env
+
 ```bash
 API_KEY="secureapikeyforbackend"
 OPENAI_KEY="your-openai-api-key"
 ```
+
 - arbor_app/assets/.env
+
 ```bash
 API_KEY="secureapikeyforbackend"
 OPENAI_KEY="your-openai-api-key"
 BASE_URL="http://127.0.0.1:8000"
 ```
 
-
 ### Backend Setup
 
 1. Create and activate a virtual environment:
+    
+    Note: Current setup runs on python@3.12
 
 ```bash
 python3 -m venv arbor_env
@@ -91,11 +96,17 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-3. Configure environment variables in `.env`.
+3. Configure environment variables in `.env` in both arbor_app/assets and backend/
 4. Populate the vector database:
+
+```bash
+python3 first_load_vector_db.py
+```
+
 5. Run the backend server:
 
 ```bash
+cd backend
 uvicorn main:app --reload
 ```
 
@@ -142,7 +153,9 @@ open the link below
 http://127.0.0.1:8000/docs#/
 
 ## Testing
+
 Functional testing completed on following queries -
+
 1. How to install lumber? /technical-support
 2. How much does lumber cost? /queries
 3. How to plan installation of lumber? /project-planning
@@ -153,6 +166,7 @@ Functional testing completed on following queries -
 Unit testing could not be executed in the allotted time, while as things are working it can be programmed using pytest.
 
 ---
+
 Copyright (c) 2024 Surbhit Kumar
 
 All rights reserved.
@@ -161,4 +175,7 @@ This work is the property of Surbhit and is protected under copyright law.
 Unauthorized copying, distribution, or use of this code, in whole or in part, is strictly prohibited.
 
 For inquiries, contact: me@surbhitkumar.com
+
+```text
+
 ```
