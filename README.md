@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-An LLM-powered assistant designed for contractors and builders to aid in decision-making regarding building materials.
+An LLM-powered assistant designed for contractors and builders to aid in decision-making regarding building materials in a home-improvement eCommerce company.
 
 ## Features
 
