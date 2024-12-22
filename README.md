@@ -1,4 +1,4 @@
-# Arbor Test Project
+# eCommerce Chatbot Project
 
 ## Project Overview
 
@@ -19,7 +19,7 @@ An LLM-powered assistant designed for contractors and builders to aid in decisio
 ## Project Structure
 
 ```asciidoc
-arbor-test/
+chatbot-test/
 ├── backend/
 │   |
 │   ├── first_load_vector_db.py
@@ -45,7 +45,7 @@ arbor-test/
 │   └── data/
 │       ├── __init__.py
 │       └── materials_data.py
-├──arbor_app/lib/   [Flutter Project Files]
+├──chatbot_app/lib/   [Flutter Project Files]
 |   ├── pages/
 │   │   ├── project_planning.dart
 │   │   ├── queries.dart
@@ -58,7 +58,7 @@ arbor-test/
 
 ## Project Architecture
 
-![alt text](arbor_test.jpg)
+![alt text](chatbot_test.jpg)
 
 ### Architecture Overview
 
@@ -107,7 +107,7 @@ The Construction Materials Assistant is designed to provide users with technical
     - Default Prompts: Currently, the system uses default prompts template.
     - Formatting as plain text without ** for bold text, augmented with query to llm.
 
-### RAG System Design in Arbor Test
+### RAG System Design in eCommerce Chatbot
 
 - Uses Chroma to store semantic embeddings of knowledge base documents.
 - Queries and documents are embedded using OpenAI’s embedding models.
@@ -131,7 +131,7 @@ API_KEY="secureapikeyforbackend"
 OPENAI_KEY="your-openai-api-key"
 ```
 
-- arbor_app/assets/.env
+- chatbot_app/assets/.env
 
 ```bash
 API_KEY="secureapikeyforbackend"
@@ -146,8 +146,8 @@ BASE_URL="http://127.0.0.1:8000"
    Note: Current setup runs on python@3.12
 
 ```bash
-python3 -m venv arbor_env
-source arbor_env/bin/activate
+python3 -m venv chatbot_env
+source chatbot_env/bin/activate
 ```
 
 2. Install dependencies:
@@ -156,7 +156,7 @@ source arbor_env/bin/activate
 pip install -r requirements.txt
 ```
 
-3. Configure environment variables in `.env` in both arbor_app/assets and backend/
+3. Configure environment variables in `.env` in both chatbot_app/assets and backend/
 4. Populate the vector database:
 
 ```bash
@@ -179,7 +179,7 @@ uvicorn main:app --reload
 1. Navigate to the Flutter project directory:
 
 ```bash
-cd arbor_app
+cd chatbot_app
 ```
 
 2. Install dependencies:
