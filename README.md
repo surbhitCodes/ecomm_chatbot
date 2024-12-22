@@ -58,7 +58,7 @@ chatbot-test/
 
 ## Project Architecture
 
-![alt text](chatbot_test.jpg)
+![alt text](chatbot.jpg)
 
 ### Architecture Overview
 
