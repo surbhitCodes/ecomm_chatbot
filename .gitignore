@@ -1,3 +1,3 @@
-arbor_env/
+chatbot_env/
 backend/.env
-arbor_app/assets/.env
+chatbot_app/assets/.env
