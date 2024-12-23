@@ -223,8 +223,6 @@ Functional testing completed on following queries -
 5. Which lumber is better? /queries
 6. \<empty> /queries /technical-support /project-planning
 
-Unit testing could not be executed in the allotted time, while as things are working it can be programmed using pytest.
-
 ---
 
 Copyright (c) 2024 Surbhit Kumar
