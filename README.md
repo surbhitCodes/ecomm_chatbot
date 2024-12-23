@@ -19,7 +19,7 @@ An LLM-powered assistant designed for contractors and builders to aid in decisio
 ## Project Structure
 
 ```asciidoc
-chatbot-test/
+ecomm_chatbot/
 ├── backend/
 │   |
 │   ├── first_load_vector_db.py
